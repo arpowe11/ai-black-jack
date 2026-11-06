@@ -94,7 +94,8 @@ Desktop.ini
 # =========================
 # Machine Learning / AI
 # =========================
-models/
+models/*.pkl
+models/*.pth
 checkpoints/
 runs/
 wandb/
