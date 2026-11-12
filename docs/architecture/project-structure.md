@@ -13,7 +13,7 @@ The core logic is solid, but the notebook has accumulated duplication that the n
 - Tests written as print-and-check cells instead of assertions.
 - Unseeded randomness, so the documented experiment results can't be reproduced.
 
-## Proposed layout
+## Project layout
 
 ```
 blackjack-ai/

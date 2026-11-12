@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blackjack-ai"
+version = "0.1.0"
+description = "Blackjack with rule-based and Q-learning AI players"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []                      # the game itself needs nothing
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "mypy"]
+notebooks = ["jupyter", "matplotlib"]
+
+[project.scripts]
+blackjack = "blackjack.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
