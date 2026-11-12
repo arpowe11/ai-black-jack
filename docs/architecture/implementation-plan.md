@@ -82,11 +82,11 @@ New notebooks import only from `blackjack` and define no game logic.
 
 ## Step 8: Final checks
 
-- [ ] `ruff check .`
-- [ ] `mypy src`
-- [ ] `pytest`
-- [ ] `python -m blackjack play` runs end to end
-- [ ] Commit by layer so history mirrors the migration order
+- [x] `ruff check .`
+- [x] `mypy src`
+- [x] `pytest`
+- [x] `python -m blackjack play` runs end to end
+- [X] Commit by layer so history mirrors the migration order
 
 ## Notebook-to-module quick reference
 

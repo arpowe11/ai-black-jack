@@ -20,6 +20,34 @@ def test_play_stand_prints_results(monkeypatch, capsys):
     assert "AI vs Dealer:" in out
 
 
+def test_board_shows_all_three_hands_before_the_prompt(monkeypatch, capsys):
+    feed_inputs(monkeypatch, "stand")
+    cli(["play", "--seed", "1"])
+    out = capsys.readouterr().out
+    before_decision = out.split("Player stands.")[0]
+    for row in ("Dealer :", "Player :", "AI     :"):
+        assert row in before_decision
+    assert "[hidden]" in before_decision            # dealer's hole card
+    assert "(showing" in before_decision
+
+
+def test_dealer_card_is_revealed_on_dealer_turn(monkeypatch, capsys):
+    feed_inputs(monkeypatch, "stand")
+    cli(["play", "--seed", "1"])
+    out = capsys.readouterr().out
+    after_reveal = out.split("--- Dealer's Turn ---")[1]
+    assert "[hidden]" not in after_reveal
+
+
+def test_final_results_list_every_hand_with_scores(monkeypatch, capsys):
+    feed_inputs(monkeypatch, "stand")
+    cli(["play", "--seed", "1"])
+    final = capsys.readouterr().out.split("--- Final Results ---")[1]
+    for row in ("Dealer :", "Player :", "AI     :"):
+        assert row in final
+    assert final.count("=") == 3                    # one score per hand
+
+
 def test_invalid_input_reprompts(monkeypatch, capsys):
     queue = feed_inputs(monkeypatch, "maybe", "STAND")
     cli(["play", "--seed", "1"])

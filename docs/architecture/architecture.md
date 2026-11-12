@@ -81,7 +81,7 @@ flowchart TD
 
 `play_round(player, ai, rng=..., emit=...)`:
 
-1. **Deal.** A shuffled deck is created. Player, AI, and dealer each receive two cards, dealt in turn. Each card emits a `deal` event; the AI's and dealer's second cards are marked not visible.
+1. **Deal.** A shuffled deck is created. Player, AI, and dealer each receive two cards, dealt in turn. Each card emits a `deal` event; only the dealer's second (hole) card is marked not visible, and the console shows it as `[hidden]` until the dealer's turn.
 2. **Player turn.** `play_hand(player, ...)` loops: emit the score; stop if bust; ask the strategy for a `GameState` decision; on `HIT` draw a card and emit it; on `STAND` stop.
 3. **AI turn.** The same `play_hand` runs with the AI strategy. The AI plays even if the player busted.
 4. **Dealer turn.** If at least one of the two players has not busted, `play_dealer` draws until the dealer reaches 17.

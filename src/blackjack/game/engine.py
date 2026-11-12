@@ -19,7 +19,7 @@ class Event:
     """Something that happened in a round.
 
     kind: "deal", "turn", "score", "hit", "stand", "bust", or "empty" (deck ran out).
-    visible: False for dealt cards that are face-down to the human player.
+    visible: False for a dealt card that starts face down (the dealer's hole card).
     """
 
     kind: str
@@ -108,7 +108,8 @@ def play_round(
         for who, hand in hands.items():
             card = deck.pop()
             hand.append(card)
-            emit(Event("deal", who, card=card, visible=(who == "Player" or i == 0)))
+            # Only the dealer's second card (the hole card) starts face down.
+            emit(Event("deal", who, card=card, visible=(who != "Dealer" or i == 0)))
 
     player_hand, ai_hand, dealer_hand = hands["Player"], hands["AI"], hands["Dealer"]
     dealer_card = dealer_hand[0]
