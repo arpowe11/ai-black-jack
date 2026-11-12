@@ -15,7 +15,7 @@ dev = ["pytest", "ruff", "mypy"]
 notebooks = ["jupyter", "matplotlib"]
 
 [project.scripts]
-blackjack = "blackjack.cli:main"
+blackjack = "blackjack.cli:cli"
 
 [tool.setuptools.packages.find]
 where = ["src"]

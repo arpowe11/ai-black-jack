@@ -28,10 +28,10 @@ Ported together with tests so the base layer is verified first.
 
 ## Step 2: AI base and simple strategies (`ai/`)
 
-- [ ] `base.py`: `Action` enum, `GameState` dataclass (from cell 10 `get_game_state`), `Strategy` Protocol with `decide(state) -> Action`.
-- [ ] `baseline.py`: `BaselineStrategy` (cell 9).
-- [ ] `rule_based.py`: `RuleBasedStrategy` (cell 32, `get_ai_action_v2`; drop v1 from cell 19).
-- [ ] `tests/ai/test_baseline.py` and `test_rule_based.py`: print-and-check cells (8, 12-38) become parametrized asserts.
+- [x] `base.py`: `Action` enum, `GameState` dataclass (from cell 10 `get_game_state`), `Strategy` Protocol with `decide(state) -> Action`.
+- [x] `baseline.py`: `BaselineStrategy` (cell 9).
+- [x] `rule_based.py`: `RuleBasedStrategy` (cell 32, `get_ai_action_v2`; drop v1 from cell 19).
+- [x] `tests/ai/test_baseline.py` and `test_rule_based.py`: print-and-check cells (8, 12-38) become parametrized asserts.
 
 **Done when:** `pytest tests/ai/test_baseline.py tests/ai/test_rule_based.py` passes.
 
