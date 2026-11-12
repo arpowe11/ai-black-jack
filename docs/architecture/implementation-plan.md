@@ -37,11 +37,11 @@ Ported together with tests so the base layer is verified first.
 
 ## Step 3: Engine, console UI, and `play`
 
-- [ ] `game/engine.py`: one `play_hand(strategy)` replacing `player_turn` and `ai_player_turn` (cells 6, 34), plus a round runner. No `print()`; return results or yield events.
-- [ ] `ui/console.py`: all `print()`/`input()` calls and `HumanStrategy`.
-- [ ] `cli.py`: `play` subcommand, matching the notebook's `main()` (cell 65).
-- [ ] `tests/integration/test_engine.py`: full rounds with stacked decks (cells 36-38).
-- [ ] `tests/integration/test_cli.py`: monkeypatched `input()`.
+- [x] `game/engine.py`: one `play_hand(strategy)` replacing `player_turn` and `ai_player_turn` (cells 6, 34), plus a round runner. No `print()`; return results or yield events.
+- [x] `ui/console.py`: all `print()`/`input()` calls and `HumanStrategy`.
+- [x] `cli.py`: `play` subcommand, matching the notebook's `main()` (cell 65).
+- [x] `tests/integration/test_engine.py`: full rounds with stacked decks (cells 36-38).
+- [x] `tests/integration/test_cli.py`: monkeypatched `input()`.
 
 **Done when:** `blackjack play` behaves like the notebook's `main()` and integration tests pass.
 
