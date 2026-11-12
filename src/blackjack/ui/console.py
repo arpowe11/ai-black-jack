@@ -99,8 +99,12 @@ def render_results(result: RoundResult) -> None:
     print(format_row("Player", result.player_hand))
     print(format_row("AI", result.ai_hand))
     print()
-    print(f"Player vs Dealer: {result.player_outcome.value}")
-    print(f"AI vs Dealer: {result.ai_outcome.value}")
+    print("You are up against both the dealer and the AI:")
+    print(f"  Player vs Dealer: {result.player_outcome.value}")
+    print(f"  Player vs AI:     {result.player_vs_ai.value}")
+    print()
+    print(f"  AI vs Dealer:     {result.ai_outcome.value}")
+    print(f"  AI vs Player:     {result.ai_vs_player.value}")
 
 
 def play_game(ai: Strategy, rng: random.Random | None = None) -> RoundResult:

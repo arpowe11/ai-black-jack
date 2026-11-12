@@ -11,7 +11,12 @@ from blackjack.ai.base import Action, Strategy, get_game_state
 from blackjack.game.cards import Card, create_deck
 from blackjack.game.dealer import play_dealer
 from blackjack.game.hand import calculate_score
-from blackjack.game.rules import BLACKJACK, Outcome, evaluate_outcome
+from blackjack.game.rules import (
+    BLACKJACK,
+    Outcome,
+    evaluate_head_to_head,
+    evaluate_outcome,
+)
 
 
 @dataclass(frozen=True)
@@ -43,6 +48,8 @@ class RoundResult:
     dealer_hand: list[Card]
     player_outcome: Outcome
     ai_outcome: Outcome
+    player_vs_ai: Outcome
+    ai_vs_player: Outcome
     deck: list[Card] = field(repr=False, default_factory=list)
 
     @property
@@ -133,5 +140,7 @@ def play_round(
         dealer_hand=dealer_hand,
         player_outcome=evaluate_outcome(player_score, dealer_score),
         ai_outcome=evaluate_outcome(ai_score, dealer_score),
+        player_vs_ai=evaluate_head_to_head(player_score, ai_score),
+        ai_vs_player=evaluate_head_to_head(ai_score, player_score),
         deck=deck,
     )

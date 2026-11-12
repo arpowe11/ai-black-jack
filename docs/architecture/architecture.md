@@ -60,7 +60,7 @@ flowchart TD
 |---|---|
 | `game/cards.py` | Deck creation (`create_deck(rng)`) and card values. Cards are dicts: `{"rank": "Ace", "suit": "Hearts"}` |
 | `game/hand.py` | `calculate_score`, `has_usable_ace`, `is_bust` |
-| `game/rules.py` | `BLACKJACK = 21`, `DEALER_STAND = 17`, the `Outcome` enum and `evaluate_outcome` |
+| `game/rules.py` | `BLACKJACK = 21`, `DEALER_STAND = 17`, the `Outcome` enum, `evaluate_outcome` (vs the dealer) and `evaluate_head_to_head` (player vs player) |
 | `game/dealer.py` | `dealer_should_hit`, `play_dealer` (silent; returns the cards drawn) |
 | `game/engine.py` | `play_hand(strategy, ...)` and `play_round(player, ai, ...)`; reports progress as `Event`s |
 | `ai/base.py` | `Action`, `GameState`, the `Strategy` protocol, `get_game_state` |
@@ -85,7 +85,7 @@ flowchart TD
 2. **Player turn.** `play_hand(player, ...)` loops: emit the score; stop if bust; ask the strategy for a `GameState` decision; on `HIT` draw a card and emit it; on `STAND` stop.
 3. **AI turn.** The same `play_hand` runs with the AI strategy. The AI plays even if the player busted.
 4. **Dealer turn.** If at least one of the two players has not busted, `play_dealer` draws until the dealer reaches 17.
-5. **Result.** `evaluate_outcome` compares each player's score to the dealer's and the engine returns a `RoundResult` with all hands, scores, and outcomes.
+5. **Result.** The human player competes against both the dealer and the AI. `evaluate_outcome` compares each player's score to the dealer's, and `evaluate_head_to_head` compares the player to the AI (a bust loses, except that both busting is a tie). The engine returns a `RoundResult` with all hands, scores, and the three outcomes: `player_outcome`, `ai_outcome`, and `player_vs_ai`.
 
 The Q-learning trainer and the comparison tool call the same game pieces (`create_deck`, `play_dealer`, `evaluate_outcome`), so training, evaluation, and real play cannot drift apart.
 

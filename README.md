@@ -1,6 +1,6 @@
 # Blackjack AI
 
-A command-line Blackjack game where a human and an AI player each play against the dealer. The AI can use a baseline rule, a rule-based strategy, or a Q-learning agent trained by self-play. The package also includes tools to train and compare the strategies reproducibly.
+A command-line Blackjack game where a human plays against both a dealer and an AI player. The AI can use a baseline rule, a rule-based strategy, or a Q-learning agent trained by self-play. The package also includes tools to train and compare the strategies reproducibly.
 
 Penn State, Foundations of AI, final project. See [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
@@ -41,7 +41,9 @@ blackjack compare --games 1000 --seed 42
 
 ## Rules implemented
 
-Standard hit/stand Blackjack against a dealer who hits below 17 and stands on 17 or more (including soft 17). Aces count 11 unless that would bust the hand. There are no splits, doubles, insurance, or natural-blackjack payouts. The result for each player is win, loss, or tie against the dealer.
+Standard hit/stand Blackjack against a dealer who hits below 17 and stands on 17 or more (including soft 17). Aces count 11 unless that would bust the hand. There are no splits, doubles, insurance, or natural-blackjack payouts.
+
+You play against both the dealer and the AI. Each round reports three results: you vs the dealer, you vs the AI, and the AI vs the dealer. Against the dealer a bust is always a loss. Between you and the AI, the higher score wins, and if you both bust it is a tie.
 
 ## Project layout
 

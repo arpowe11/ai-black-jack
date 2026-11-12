@@ -82,3 +82,22 @@ def test_seeded_rounds_are_reproducible():
     b = play_round(BaselineStrategy(), BaselineStrategy(), rng=random.Random(7))
     assert a.player_hand == b.player_hand
     assert a.dealer_hand == b.dealer_hand
+
+
+def test_player_is_also_ranked_against_the_ai(stacked_deck):
+    # player 20, AI 17 (baseline stands), dealer 17
+    deck = stacked_deck("K", "10", "10", "Q", "7", "7")
+    result = play_round(Scripted(), BaselineStrategy(), deck)
+    assert result.player_vs_ai is Outcome.WIN
+
+    # player 17, AI 20
+    deck = stacked_deck("10", "K", "10", "7", "Q", "7")
+    result = play_round(Scripted(), BaselineStrategy(), deck)
+    assert result.player_vs_ai is Outcome.LOSS
+
+
+def test_both_busting_is_a_tie_between_players(stacked_deck):
+    deck = stacked_deck("10", "10", "10", "6", "6", "2", "K", "K", "9")
+    result = play_round(Scripted(Action.HIT), BaselineStrategy(), deck)
+    assert result.player_score > 21 and result.ai_score > 21
+    assert result.player_vs_ai is Outcome.TIE

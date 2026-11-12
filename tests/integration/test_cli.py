@@ -17,6 +17,7 @@ def test_play_stand_prints_results(monkeypatch, capsys):
     assert "Player stands." in out
     assert "Final Results" in out
     assert "Player vs Dealer:" in out
+    assert "Player vs AI:" in out
     assert "AI vs Dealer:" in out
 
 
