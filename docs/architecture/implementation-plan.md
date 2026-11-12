@@ -47,12 +47,12 @@ Ported together with tests so the base layer is verified first.
 
 ## Step 4: Q-learning
 
-- [ ] `ai/q_learning.py`: `QLearningAgent` class with `choose`, `update`, `save`, `load` (cells 42-46). Take `rng` and `epsilon` as constructor args. Serialize tuple keys as strings such as `"15,10,False"`.
-- [ ] `ai/training.py`: `train_episode()` and `train(n, seed)` from v4 (cell 57). Drop v1-v3 and v4's redundant second `random.shuffle`.
-- [ ] `tests/ai/test_q_learning.py`: update math (0.0 with reward 1 and learning rate 0.1 gives 0.1), `choose()` picks argmax at `epsilon=0`, save/load round trip.
-- [ ] `tests/ai/test_training.py`: small deterministic smoke test. Do not assert win rates.
-- [ ] Add `--ai q-learning` to `play`.
-- [ ] Add `train` subcommand; run `blackjack train --seed 42` to produce `models/q_table.json`.
+- [x] `ai/q_learning.py`: `QLearningAgent` class with `choose`, `update`, `save`, `load` (cells 42-46). Take `rng` and `epsilon` as constructor args. Serialize tuple keys as strings such as `"15,10,False"`.
+- [x] `ai/training.py`: `train_episode()` and `train(n, seed)` from v4 (cell 57). Drop v1-v3 and v4's redundant second `random.shuffle`.
+- [x] `tests/ai/test_q_learning.py`: update math (0.0 with reward 1 and learning rate 0.1 gives 0.1), `choose()` picks argmax at `epsilon=0`, save/load round trip.
+- [x] `tests/ai/test_training.py`: small deterministic smoke test. Do not assert win rates.
+- [x] Add `--ai q-learning` to `play`.
+- [x] Add `train` subcommand; run `blackjack train --seed 42` to produce `models/q_table.json`.
 
 **Done when:** a seeded training run is reproducible and `blackjack play --ai q-learning` works.
 

@@ -48,6 +48,30 @@ def test_baseline_ai_option(monkeypatch, capsys):
     assert "Final Results" in capsys.readouterr().out
 
 
+def test_train_writes_model_and_play_uses_it(monkeypatch, capsys, tmp_path):
+    model = tmp_path / "q.json"
+    cli(["train", "--games", "500", "--seed", "1", "--output", str(model)])
+    assert model.exists()
+    assert "Trained 500 games" in capsys.readouterr().out
+
+    feed_inputs(monkeypatch, "stand")
+    cli(["play", "--ai", "q-learning", "--model", str(model), "--seed", "1"])
+    assert "Final Results" in capsys.readouterr().out
+
+
+def test_training_is_reproducible_from_cli(tmp_path):
+    a, b = tmp_path / "a.json", tmp_path / "b.json"
+    cli(["train", "--games", "300", "--seed", "9", "--output", str(a)])
+    cli(["train", "--games", "300", "--seed", "9", "--output", str(b)])
+    assert a.read_text() == b.read_text()
+
+
+def test_q_learning_without_model_explains_how_to_train(tmp_path):
+    with pytest.raises(SystemExit) as exc:
+        cli(["play", "--ai", "q-learning", "--model", str(tmp_path / "none.json")])
+    assert "blackjack train" in str(exc.value)
+
+
 def test_unknown_ai_is_rejected():
     with pytest.raises(SystemExit):
         cli(["play", "--ai", "nope"])
