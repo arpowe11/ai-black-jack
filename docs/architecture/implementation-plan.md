@@ -67,9 +67,9 @@ Ported together with tests so the base layer is verified first.
 
 New notebooks import only from `blackjack` and define no game logic.
 
-- [ ] `01_game_walkthrough.ipynb`
-- [ ] `02_q_learning_training.ipynb`
-- [ ] `03_strategy_comparison.ipynb` (matplotlib chart from cell 63; requires the `notebooks` extra)
+- [x] `01_game_walkthrough.ipynb`
+- [x] `02_q_learning_training.ipynb`
+- [x] `03_strategy_comparison.ipynb` (matplotlib chart from cell 63; requires the `notebooks` extra)
 
 ## Step 7: Docs
 
