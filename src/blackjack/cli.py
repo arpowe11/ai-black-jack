@@ -1,4 +1,4 @@
-"""Command-line entry point: `play` and `train`. `compare` arrives in step 5."""
+"""Command-line entry point: `play`, `train`, and `compare`."""
 
 import argparse
 import random
@@ -7,6 +7,7 @@ from pathlib import Path
 
 from blackjack.ai.base import Strategy
 from blackjack.ai.baseline import BaselineStrategy
+from blackjack.ai.evaluation import compare_strategies
 from blackjack.ai.q_learning import QLearningAgent
 from blackjack.ai.rule_based import RuleBasedStrategy
 from blackjack.ai.training import train
@@ -32,6 +33,12 @@ def build_parser() -> argparse.ArgumentParser:
     trn.add_argument("--seed", type=int, default=None, help="seed for reproducible training")
     trn.add_argument("--output", type=Path, default=DEFAULT_MODEL,
                      help=f"where to save the Q-table (default: {DEFAULT_MODEL})")
+
+    cmp = sub.add_parser("compare", help="compare AI strategies on identical decks")
+    cmp.add_argument("--games", type=int, default=1000, help="games per strategy (default: 1000)")
+    cmp.add_argument("--seed", type=int, default=42, help="seed for the decks (default: 42)")
+    cmp.add_argument("--model", type=Path, default=DEFAULT_MODEL,
+                     help=f"Q-table to evaluate (default: {DEFAULT_MODEL})")
     return parser
 
 
@@ -60,3 +67,11 @@ def cli(argv: Sequence[str] | None = None) -> None:
               f"(wins {result.wins}, losses {result.losses}, ties {result.ties}; "
               f"win rate {result.win_rate:.1%} while exploring)")
         print(f"Learned {len(result.agent.q_table)} states -> {args.output}")
+
+    elif args.command == "compare":
+        strategies = {name: make_ai(name, args.model) for name in AI_CHOICES}
+        results = compare_strategies(strategies, args.games, args.seed)
+        print(f"{args.games} games per strategy, seed {args.seed}, model {args.model}")
+        print(f"{'Strategy':<12}{'Wins':>7}{'Losses':>8}{'Ties':>7}{'Win rate':>10}")
+        for name, r in results.items():
+            print(f"{name:<12}{r.wins:>7}{r.losses:>8}{r.ties:>7}{r.win_rate:>10.1%}")

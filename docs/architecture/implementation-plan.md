@@ -58,8 +58,8 @@ Ported together with tests so the base layer is verified first.
 
 ## Step 5: Evaluation and `compare`
 
-- [ ] `ai/evaluation.py`: `compare_strategies` (cells 60, 62).
-- [ ] `cli.py`: add `compare` subcommand with `--seed`.
+- [x] `ai/evaluation.py`: `compare_strategies` (cells 60, 62).
+- [x] `cli.py`: add `compare` subcommand with `--seed`.
 
 **Done when:** `blackjack compare --seed 42` gives the same output on every run.
 

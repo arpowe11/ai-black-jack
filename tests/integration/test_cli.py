@@ -72,6 +72,26 @@ def test_q_learning_without_model_explains_how_to_train(tmp_path):
     assert "blackjack train" in str(exc.value)
 
 
+def test_compare_is_reproducible_and_lists_all_strategies(capsys, tmp_path):
+    model = tmp_path / "q.json"
+    cli(["train", "--games", "500", "--seed", "1", "--output", str(model)])
+    capsys.readouterr()
+
+    args = ["compare", "--games", "200", "--seed", "42", "--model", str(model)]
+    cli(args)
+    first = capsys.readouterr().out
+    cli(args)
+    assert capsys.readouterr().out == first
+    for name in ("rule-based", "baseline", "q-learning"):
+        assert name in first
+
+
+def test_compare_without_model_explains_how_to_train(tmp_path):
+    with pytest.raises(SystemExit) as exc:
+        cli(["compare", "--model", str(tmp_path / "none.json")])
+    assert "blackjack train" in str(exc.value)
+
+
 def test_unknown_ai_is_rejected():
     with pytest.raises(SystemExit):
         cli(["play", "--ai", "nope"])
