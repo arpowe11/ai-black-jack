@@ -73,12 +73,12 @@ New notebooks import only from `blackjack` and define no game logic.
 
 ## Step 7: Docs
 
-- [ ] `docs/index.md`
-- [ ] `docs/architecture.md`: module map and how a round flows
-- [ ] `docs/ai-strategies.md` (from cells 40-41)
-- [ ] `docs/experiments/rule-vs-qlearning.md` (from cell 64, using the new seeded numbers; expect results to differ slightly from the original 44.6% vs 38.4%)
-- [ ] `docs/contributors.md` (from cells 66-67)
-- [ ] Update `README.md` with install and usage instructions
+- [x] `docs/index.md`
+- [x] `docs/architecture/architecture.md`: module map and how a round flows
+- [x] `docs/strategies/ai-strategies.md` (from cells 40-41)
+- [x] `docs/experiments/rule-vs-qlearning.md` (from cell 64, using the new seeded numbers; expect results to differ slightly from the original 44.6% vs 38.4%)
+- [x] `CONTRIBUTORS.md` at the repo root (from cells 66-67)
+- [x] Update `README.md` with install and usage instructions
 
 ## Step 8: Final checks
 
